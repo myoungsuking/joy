@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리의 결혼식에 초대합니다</title>
+    <style>
+        /* Google Fonts Preconnect */
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Myeongjo:wght@400;700&display=swap');
+
+        :root {
+            --font-main: 'Nanum Myeongjo', serif;
+            --font-body: 'Gowun Dodum', sans-serif;
+            --color-primary: #8B4513; /* SaddleBrown */
+            --color-secondary: #D2B48C; /* Tan */
+            --color-background: #FDF5E6; /* OldLace */
+            --color-text: #5D4037; /* Dark Brown */
+        }
+
+        body {
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            background-color: white;
+        }
+
+        /* --- Animation --- */
+        .animation-container {
+            width: 100%;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        #main-photo {
+            width: 100%;
+            max-width: 250px; /* 요청에 따라 사이즈 절반으로 수정 */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            animation: sparkle-in 2.5s ease-out forwards;
+        }
+
+        @keyframes sparkle-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+                filter: brightness(1.5) saturate(1.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+                filter: brightness(1.1) saturate(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: brightness(1) saturate(1);
+            }
+        }
+        
+        /* --- General Styles --- */
+        h1, h2, h3 {
+            font-family: var(--font-main);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--color-secondary);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .section {
+            padding: 60px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* --- Header --- */
+        .header {
+            padding-bottom: 40px;
+        }
+        
+        .header .intro-text {
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .names {
+            font-family: var(--font-main);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .names .groom { color: #3A5FCD; } /* Royal Blue */
+        .names .bride { color: #E3256B; } /* Razzle Dazzle Rose */
+
+        /* --- Invitation Text --- */
+        .invitation-text p {
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Location & Date --- */
+        .info-item {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .info-item strong {
+            font-family: var(--font-main);
+            color: var(--color-primary);
+        }
+
+        /* --- Map --- */
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+            border: 1px solid #ddd;
+        }
+
+        /* --- Gallery --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* --- Contact --- */
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        .contact-person {
+            padding: 10px;
+        }
+        .contact-person h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .contact-person a {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-size: 1.1rem;
+        }
+        .contact-person a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 30px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* --- Scroll Fade-in Animation --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            p { font-size: 1rem; }
+            
+            @keyframes walk-in {
+                100% {
+                    transform: translateX(calc(50vw - 50% - 10px)); /* 모바일 화면 중앙 (패딩 고려) */
+                }
+            }
+
+            .contact-info {
+                flex-direction: column;
+            }
+            .contact-person {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ========== 메인 타이틀 및 애니메이션 ========== -->
+        <header class="header section">
+            <p class="intro-text fade-in">우리 결혼합니다</p>
+            <h1 class="fade-in">신랑 & 신부</h1>
+            
+            <!-- **수정:** 메인 사진 파일 경로를 입력하세요 -->
+            <div class="animation-container">
+                <img id="main-photo" src="다운로드 (1).jpeg" alt="우리의 결혼 사진">
+            </div>
+
+            <div class="names fade-in">
+                <!-- **수정:** 신랑, 신부, 부모님 성함을 입력하세요 -->
+                <span class="groom">김명수</span> & <span class="bride">고민시</span>
+                <p style="font-size: 1rem; margin-top: 20px; color: #777;">
+                    김영수 · 박은경의 아들 <strong>명수</strong><br>
+                    이철수 · 최미자의 딸 <strong>민시</strong>
+                </p>
+            </div>
+        </header>
+
+        <!-- ========== 초대글 ========== -->
+        <section class="invitation-text section">
+            <h2 class="fade-in">초대합니다</h2>
+            <p class="fade-in">
+                <!-- **수정:** 초대 문구를 자유롭게 변경하세요 -->
+                서로 마주보던 저희 두 사람,<br>
+                이제 함께 한 곳을 바라보며<br>
+                인생의 새로운 여행을 시작하려 합니다.<br>
+                귀한 걸음 하시어 자리를 빛내주시길 바랍니다.
+            </p>
+        </section>
+
+        <!-- ========== 날짜 및 장소 정보 ========== -->
+        <section class="info section">
+            <h2 class="fade-in">오시는 길</h2>
+            <div class="fade-in">
+                <!-- **수정:** 예식 날짜와 장소를 입력하세요 -->
+                <div class="info-item">
+                    <strong>일시:</strong> 2025년 10월 25일 토요일 오후 2시
+                </div>
+                <div class="info-item">
+                    <strong>장소:</strong> 서울특별시 중구 아펠가모 1층 채플홀
+                </div>
+            </div>
+            
+            <!-- **수정:** 카카오맵 등에서 'iframe 태그 복사' 기능으로 코드를 가져와 아래에 붙여넣으세요 -->
+            <div id="map" class="fade-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.839130332815!2d126.977969115594!3d37.55989697979931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca265488f3b67%3A0x98e1d16d6b38f7d!2z7JWE7ZSM6rCA66qo!5e0!3m2!1sko!2skr!4v1658893301245!5m2!1sko!2skr" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- ========== 갤러리 ========== -->
+        <section class="gallery section">
+            <h2 class="fade-in">우리의 순간들</h2>
+            <div class="gallery-grid fade-in">
+                <!-- **수정:** 웨딩 사진 이미지 파일 경로를 입력하세요 (6~9장 추천) -->
+                <img src="다운로드 (1).jpeg" alt="웨딩 사진 1" style="width: 50%; margin: 0 auto; display: block;">
+                <img src="다운로드 (2).jpeg" alt="웨딩 사진 2" style="width: 50%; margin: 0 auto; display: block;">
+            </div>
+        </section>
+
+        <!-- ========== 연락처 ========== -->
+        <section class="contact section">
+            <h2 class="fade-in">마음 전하실 곳</h2>
+            <div class="contact-info fade-in">
+                <div class="contact-person">
+                    <h3>신랑측</h3>
+                    <!-- **수정:** 연락처 정보를 입력하세요 -->
+                    <p>신랑 김명수: <a href="tel:010-1234-5678">010-1234-5678</a></p>
+                    <p>아버지 김영수: <a href="tel:010-1111-2222">010-1111-2222</a></p>
+                    <p>어머니 박은경: <a href="tel:010-3333-4444">010-3333-4444</a></p>
+                </div>
+                <div class="contact-person">
+                    <h3>신부측</h3>
+                    <!-- **수정:** 연락처 정보를 입력하세요 -->
+                    <p>신부 고민시: <a href="tel:010-9876-5432">010-9876-5432</a></p>
+                    <p>아버지 이철수: <a href="tel:010-5555-6666">010-5555-6666</a></p>
+                    <p>어머니 최미자: <a href="tel:010-7777-8888">010-7777-8888</a></p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Made with ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        // 스크롤 시 fade-in 효과 적용
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2, // 요소가 20% 보일 때 애니메이션 실행
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+
+</body>
+</html>
